@@ -105,7 +105,7 @@ Once you’ve chosen and downloaded an installer, run it by double-clicking on t
 There are four things to notice about this dialog box:
 </br>
 <br>
-1. The default install path is in the AppData/ directory of the current Windows user.
+1. The default install path is in the AppData directory of the current Windows user.
 </br>
 <br>
 2. The Customize installation button can be used to customize the installation location and which additional features get installed, including pip and IDLE.
