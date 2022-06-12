@@ -48,7 +48,7 @@ If you are a developer looking for a CLI, back-end application for you online st
  
 To get started the first thing to do is clone this repository onto your machine
  
->git clone https://github.com/SamLinoFinnegan/Back-end.git
+>git clone https://github.com/SamLinoFinnegan/SuperPy-.git
  
 Once you have the SuperPy, on your machine you can run it from your command line
  
