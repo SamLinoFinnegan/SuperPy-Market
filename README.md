@@ -88,19 +88,28 @@ You can install from the full installer in two steps.
  
  
 Step 1: Download the Full Installer
+ <br>
 Follow these steps to download the full installer:
+ <br>
 Open a browser window and navigate to the Python.org Downloads page for Windows.
 Under the “Python Releases for Windows” heading, click the link for the Latest Python 3 Release - Python 3.x.x. As of this writing, the latest version was Python 3.8.4.
+ <br>
 Scroll to the bottom and select either Windows x86-64 executable installer for 64-bit or Windows x86 executable installer for 32-bit.
  
 Step 2: Run the Installer
  
 Once you’ve chosen and downloaded an installer, run it by double-clicking on the downloaded file. A dialog box like the one below will appear:
+ <br>
 There are four things to notice about this dialog box:
+ <br>
 The default install path is in the AppData/ directory of the current Windows user.
+ <br>
 The Customize installation button can be used to customize the installation location and which additional features get installed, including pip and IDLE.
+ <br>
 The Install launcher for all users (recommended) checkbox is checked default. This means every user on the machine will have access to the py.exe launcher. You can uncheck this box to restrict Python to the current Windows user.
+ <br>
 The Add Python 3.8 to PATH checkbox is unchecked by default. There are several reasons that you might not want Python on PATH, so make sure you understand the implications before you check this box.
+ <br>
 The full installer gives you total control over the installation process.
  
 Now you should have python installed on your computer and we are ready to run our program.
