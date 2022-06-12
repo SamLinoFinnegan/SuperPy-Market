@@ -61,9 +61,9 @@ If you already have python 3 installed on your machine you can skip to: [Install
 If not this will guide you on how to setup python on your computer:
  
 There are three installation methods on Windows:
- br
+ <br>
 The Microsoft Store
- br
+ </br>
 The full installer
  br
 Windows Subsystem for Linux
