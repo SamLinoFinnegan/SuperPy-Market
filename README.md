@@ -96,21 +96,27 @@ Under the “Python Releases for Windows” heading, click the link for the Late
 Scroll to the bottom and select either Windows x86-64 executable installer for 64-bit or Windows x86 executable installer for 32-bit.
  
 Step 2: Run the Installer
- 
+ <br>
 Once you’ve chosen and downloaded an installer, run it by double-clicking on the downloaded file. A dialog box will appear:
+ </br>
  <br>
 There are four things to notice about this dialog box:
+ </br>
  <br>
 1. The default install path is in the AppData/ directory of the current Windows user.
+ </br>
  <br>
 2. The Customize installation button can be used to customize the installation location and which additional features get installed, including pip and IDLE.
+ </br>
  <br>
 3. The Install launcher for all users (recommended) checkbox is checked default. This means every user on the machine will have access to the py.exe launcher. You can uncheck this box to restrict Python to the current Windows user.
+ </br>
  <br>
 4. The Add Python 3.8 to PATH checkbox is unchecked by default. There are several reasons that you might not want Python on PATH, so make sure you understand the implications before you check this box.
+ </br>
  <br>
 The full installer gives you total control over the installation process.
- 
+</br> 
 Now you should have python installed on your computer and we are ready to run our program.
  
  
