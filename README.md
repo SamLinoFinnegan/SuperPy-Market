@@ -55,24 +55,25 @@ Once you have the SuperPy, on your machine you can run it from your command line
  
 ### **How to Install and Run SuperPy** <a name="getting_started_subparagraph1"><a>
  
-1 First you must have python installed on your machine.
+ 1 First you must have python installed on your machine.
  
 If you already have python 3 installed on your machine you can skip to: [Installing the Gooey decorator](#getting_started_subparagraph3)
 If not this will guide you on how to setup python on your computer:
- <br>
+<br>
 There are three installation methods on Windows:
- </br>
- <br>
+</br>
+<br>
 The Microsoft Store
- </br>
- <br>
+</br>
+<br>
 The full installer
- </br>
- <br>
+</br>
+<br>
 Windows Subsystem for Linux
 </br>
- <br>
+<br>
 In this section, you’ll learn how to check which version of Python, if any, is installed on your Windows computer. You’ll also learn which of the three installation methods you should use.
+</br>
 To check if you already have Python on your Windows machine, first open a command-line application, such as PowerShell.
 With the command line open, type in the following command and press Enter:
  
@@ -85,11 +86,12 @@ For professional developers who need a full-featured Python development environm
 You can install from the full installer in two steps.
  
 ### **Installing python** <a name="getting_started_subparagraph2"><a>
-
+<br>
 Step 1: Download the Full Installer
- <br>
+</br>
+<br>
 Follow these steps to download the full installer:
- <br>
+</br>
 
 Under the “Python Releases for Windows” heading, click the link for the Latest Python 3 Release - Python 3.x.x. As of this writing, the latest version was Python 3.8.4.
 <br>
