@@ -64,10 +64,12 @@ There are three installation methods on Windows:
  <br>
 The Microsoft Store
  </br>
+ <br>
 The full installer
- br
+ </br>
+ <br>
 Windows Subsystem for Linux
- br
+</br>
 In this section, you’ll learn how to check which version of Python, if any, is installed on your Windows computer. You’ll also learn which of the three installation methods you should use.
 To check if you already have Python on your Windows machine, first open a command-line application, such as PowerShell.
 With the command line open, type in the following command and press Enter:
