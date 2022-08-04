@@ -26,7 +26,7 @@ def create_time_file(time):
         print("That is an invalid input, use 1234567890 or the word reset")
         
 if time_file_exists:
-    with open("C:/Users/samue/Projects/Back-end/SuperPy_market/time.txt", "r") as read_file:
+    with open(PATH_TXT, "r") as read_file:
         num = read_file.read()
         now = date.today() + timedelta(days=int(int(num)))
 else:
