@@ -1,0 +1,17 @@
+First i would like to say how it was a great pleasure working on creating this SuperPy project, i feel that ive really learned alot and have become alot more confident in my coding skills, then what i was before starting this project.
+I took me a good while to finish but im proud of the outcome, but it wasnt all easy and here are the three main challenges i faced and how i was able to solve them
+1o   we can have multiple entries, with different quantaties of the same product in our bought.csv file, but each entry might have a different expiration date.
+Challenge: When we want to sell a product that is in our bought.csv file, how do we take the right quantity from the right entry, making sure that we update the bought.csv file with the right new amounts?
+Solution: I created condition that would start as False, and a quantity variable, that received my desired quantity of the product, and then would run a while statement, that would first check the bought.csv file, see the entries that were the closest to expire, take their value and update the bought.csv file, only once the quantity variable reached 0, then my condition variable would turn True, and leave the while loop.
+2o What if we input the same product, with the same expiration date, and bought for the same price, should we have them all on different separate entries?
+Challenge: Checking the csv file, seeing if the same product, with the same expiration date, and bought for the same price, already exists in the file, and if so updating the value and if not writing the new entry to the file.
+Solution: I created a boolean_list over a for loop, that would grab all the variables from the entry, compare them to the new variables, if yes just update the value and append a False value to the boolean_list, then update the csv file,  else append True to the boolean_list, then if all in boolean_list were True (meaning that he didnt find one of the same) he would pass to write a new entry.
+3o Wasnt as much code, but learning how to trouble shoot dependecies and libraries.
+Challenge: I bought a new PC and i had to install VScode, Python, ect…
+I have installed a GUI decorator called Gooey, and it worked fine with my previous computer, but once i installed it on the new one it wouldnt work.
+Solution: I started by uninstalling Python, and re-enstalling, then i tried updating pip, as well as the other dependencies that i needed for Gooey to run.
+After reading alot of the documentation, i discoverd that the gooey decorator uses wxtools, and when reading the wxtools website, i saw that Python 3.10, did not support wxtools, so i again uninstalled Python 3.10 and installed the 3.9 version.
+And now it works.
+So thats it, those are the three main challenges i faced while building this program.
+But i also learned alot more, but the other challenges were on reading the documentation, and try and error.
+Thanks for all the help (teachers)
