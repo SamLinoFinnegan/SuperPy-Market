@@ -17,16 +17,19 @@ PATH_TXT =os.path.join(os.getcwd(), os.path.basename('time.txt'))
 time_file_exists = os.path.isfile(PATH_TXT)  
 
 def create_time_file(time):
+    
     if time == "reset":
+        print(f"Your system date has been reseted to live date: {date.today()} ")
         os.remove(PATH_TXT)
     elif time in "1234567890":
+        print(f"Your current system date is: {date.today() + timedelta(days=int(int(time)))}")
         with open(PATH_TXT, "w") as write_file:
             write_file.write(time)
     else:
         print("That is an invalid input, use 1234567890 or the word reset")
         
 if time_file_exists:
-    with open(PATH_TXT, "r") as read_file:
+    with open("C:/Users/samue/Projects/Back-end/SuperPy_market/time.txt", "r") as read_file:
         num = read_file.read()
         now = date.today() + timedelta(days=int(int(num)))
 else:
@@ -281,6 +284,7 @@ class SuperPy:
         writer.writeheader()
         for line in reader:
             writer.writerow(line) 
+    
 # ####################################################################################################################################
 
 class Buy(SuperPy):
@@ -347,15 +351,18 @@ class Sell(SuperPy):
                         id = int(c)
                 else:
                     id = 1
-                if bought_file_exists:      # check bought file exists
-                    
-                    condition = True
-                    for line in copy_bought_reader:
+                
+                if (bought_file_exists and self.product in  [p for element in copy_bought_reader for p in element.values()] ):      # check bought file exists and make sure that the item that we want to sell is in our inventory
 
-                        expiration = line.get("Expiration") # find out how many day miising till expiration of product on current line
+                    condition = True # condition is True till the correct quantity was added to the sell file
+                    
+                    
+                    for line in copy_bought_reader: # Here we will start iterating over the bought file to find the products that are closest to expire
+
+                        expiration = line.get("Expiration") 
                         current_ex = datetime.strptime(
                             expiration, "%Y-%m-%d").date()
-                        current_num = current_ex - now
+                        current_num = current_ex - now  # find out how many days miising till expiration of product on current line
                         
                         if int(current_num.days) > 0:  # check if the item is expired
                             correct_num = int(current_num.days)
@@ -414,6 +421,7 @@ class Sell(SuperPy):
                                 id = 1
                                 if line["Quantity"] == 0:
                                     line["InStock"] = False
+
                                 csv_sell_writer.writeheader()
                                 csv_sell_writer.writerow(
                                     {"ID": id, 'Product': self.product, 'Quantity':self.quantity,
@@ -441,9 +449,10 @@ class Sell(SuperPy):
                                     break
 
                 else:
-                    print(
-                        "ID  Item  Bought_price  Bought_date  Expiration  InStock")
-                    print("Your inventory is empty")
+                    
+                    print("Your inventory file was not created, or is empty")
+                    print(f"Or you dont have {self.product} in your inventory, please make sure you are spelling the Product correctly")
+
 
             SuperPy.bought_writer(copy_bought_reader)
             
