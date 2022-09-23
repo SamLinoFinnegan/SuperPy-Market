@@ -27,9 +27,12 @@ time_file_exists = os.path.isfile(PATH_TXT)
 def create_time_file(time):
     if time == "reset":
         os.remove(PATH_TXT)
+        print("The time has reset to the original system date")
     elif time in "1234567890":
         with open(PATH_TXT, "w") as write_file:
             write_file.write(time)
+        now = date.today() + timedelta(days=int(int(time)))
+        print(f"The new system time is {now}")
     else:
         print("That is an invalid input, use 1234567890 or the word reset")
         
@@ -48,7 +51,7 @@ def parser_function():
     parser = argparse.ArgumentParser(
         description="Welcome to the My Supermarket, the tool to help you run your store")
     subparser = parser.add_subparsers(
-        dest='command', description="Choose from the diferent departments [Buy , Sell , Stock , Search_Report]")
+        dest='command', description="Choose from the diferent departments [Buy , Sell , Stock , Search_Report, Advance_time]")
 
     buy_parser = subparser.add_parser('Buy')
     sell_parser = subparser.add_parser('Sell')
@@ -339,15 +342,12 @@ class Sell(SuperPy):
                 else:
                     id = 1
                 
-                
-                if (bought_file_exists and self.product in  [p for element in copy_bought_reader for p in element.values()] ):      # check bought file exists and make sure that the item that we want to sell is in our inventory
+                if bought_file_exists and self.product in  [p for element in copy_bought_reader for p in element.values()] and self.quantity <= int([x.get("Quantity") for x in copy_bought_reader if x.get("Product") == self.product][0]):      # check bought file exists and make sure that the item that we want to sell is in our inventory
 
                     condition = True # condition is True till the correct quantity was added to the sell file
                     
                     
-                    for line in copy_bought_reader: 
-                        
-                        # Here we will start iterating over the bought file to find the products that are closest to expire
+                    for line in copy_bought_reader: # Here we will start iterating over the bought file to find the products that are closest to expire
 
                         expiration = line.get("Expiration") 
                         current_ex = datetime.strptime(
@@ -442,21 +442,19 @@ class Sell(SuperPy):
                     
                     print("Your inventory file was not created, or is empty")
                     print(f"Or you dont have {self.product} in your inventory, please make sure you are spelling the Product correctly")
-
+                    print(f"Or you are requesting more {self.product} then what you have in you inventory")
 
             SuperPy.bought_writer(copy_bought_reader)
             
 
         except Exception as e:
             print(e)
-
-
 #################################################################################################################
 
 class Report(SuperPy):
     def __init__(self, sector, sta_dat, end_dat, ex):
         self.sector = sector
-        self.sta_dat = sta_dat
+        self.sta_dat = SuperPy.check_time(sta_dat)
         self.end_dat = end_dat
         self.ex = ex
 
@@ -488,7 +486,7 @@ class Report(SuperPy):
                         line["Bought_date"], "%Y-%m-%d").date()
 
                     if self.end_dat == None:
-                        the_date = SuperPy.check_time(self.sta_dat)
+                        the_date = self.sta_dat
                         if the_date == current_date:
                             table.add_row("%s"%line["ID"],"%s"%line["Product"],"%s"%line["Quantity"],"%s"%line["Bought_price"],"%s"%line["Bought_date"],"%s"%line["Expiration"],"%s"%line["InStock"])
                             

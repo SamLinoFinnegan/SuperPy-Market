@@ -356,7 +356,7 @@ class Sell(SuperPy):
                 else:
                     id = 1
                 
-                if (bought_file_exists and self.product in  [p for element in copy_bought_reader for p in element.values()] ):      # check bought file exists and make sure that the item that we want to sell is in our inventory
+                if bought_file_exists and self.product in  [p for element in copy_bought_reader for p in element.values()] and self.quantity <= int([x.get("Quantity") for x in copy_bought_reader if x.get("Product") == self.product][0]):      # check bought file exists and make sure that the item that we want to sell is in our inventory
 
                     condition = True # condition is True till the correct quantity was added to the sell file
                     
@@ -456,7 +456,7 @@ class Sell(SuperPy):
                     
                     print("Your inventory file was not created, or is empty")
                     print(f"Or you dont have {self.product} in your inventory, please make sure you are spelling the Product correctly")
-
+                    print(f"Or you are requesting more {self.product} then what you have in you inventory")
 
             SuperPy.bought_writer(copy_bought_reader)
             
@@ -470,7 +470,7 @@ class Sell(SuperPy):
 class Report(SuperPy):
     def __init__(self, sector, sta_dat, end_dat, ex):
         self.sector = sector
-        self.sta_dat = sta_dat
+        self.sta_dat = SuperPy.check_time(sta_dat)
         self.end_dat = end_dat
         self.ex = ex
 
@@ -502,7 +502,7 @@ class Report(SuperPy):
                         line["Bought_date"], "%Y-%m-%d").date()
 
                     if self.end_dat == None:
-                        the_date = SuperPy.check_time(self.sta_dat)
+                        the_date = self.sta_dat
                         if the_date == current_date:
                             table.add_row("%s"%line["ID"],"%s"%line["Product"],"%s"%line["Quantity"],"%s"%line["Bought_price"],"%s"%line["Bought_date"],"%s"%line["Expiration"],"%s"%line["InStock"])
                             
