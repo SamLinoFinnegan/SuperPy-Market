@@ -1,5 +1,5 @@
 First i would like to say how it was a great pleasure working on creating this SuperPy project, i feel that ive really learned alot and have become alot more confident in my coding skills, then what i was before starting this project.
-I took me a good while to finish but im proud of the outcome, but it wasnt all easy and here are the three main challenges i faced and how i was able to solve them
+It took me a good while to finish but im proud of the outcome, but it wasnt all easy and here are the three main challenges i faced and how i was able to solve them
 1o   we can have multiple entries, with different quantaties of the same product in our bought.csv file, but each entry might have a different expiration date.
 Challenge: When we want to sell a product that is in our bought.csv file, how do we take the right quantity from the right entry, making sure that we update the bought.csv file with the right new amounts?
 Solution: I created condition that would start as False, and a quantity variable, that received my desired quantity of the product, and then would run a while statement, that would first check the bought.csv file, see the entries that were the closest to expire, take their value and update the bought.csv file, only once the quantity variable reached 0, then my condition variable would turn True, and leave the while loop.

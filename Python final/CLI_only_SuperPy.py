@@ -12,9 +12,17 @@ alphabet = string.ascii_uppercase
 workbook = Workbook()
 sheet = workbook.active
 
+#file paths
+CSV_PATH = os.path.join(os.getcwd(), os.path.basename('bought.csv'))
+bought_file_exists = os.path.isfile(CSV_PATH)
+
+CSV_SELL_PATH = os.path.join(os.getcwd(), os.path.basename("sold.csv"))
+sell_file_exists = os.path.isfile(CSV_SELL_PATH)
 
 PATH_TXT =os.path.join(os.getcwd(), os.path.basename('time.txt'))
 time_file_exists = os.path.isfile(PATH_TXT)  
+
+#create a file where can store the time that will be used in  the advance time feature
 
 def create_time_file(time):
     if time == "reset":
@@ -26,7 +34,7 @@ def create_time_file(time):
         print("That is an invalid input, use 1234567890 or the word reset")
         
 if time_file_exists:
-    with open("C:/Users/samue/Projects/Back-end/SuperPy_market/time.txt", "r") as read_file:
+    with open(PATH_TXT, "r") as read_file:
         num = read_file.read()
         now = date.today() + timedelta(days=int(int(num)))
 else:
@@ -96,11 +104,7 @@ def parser_function():
     return args
 
 
-CSV_PATH = os.path.join(os.getcwd(), os.path.basename('bought.csv'))
-bought_file_exists = os.path.isfile(CSV_PATH)
 
-CSV_SELL_PATH = os.path.join(os.getcwd(), os.path.basename("sold.csv"))
-sell_file_exists = os.path.isfile(CSV_SELL_PATH)
 
 class SuperPy:
 
@@ -108,7 +112,7 @@ class SuperPy:
                         "Expiration"]
     bought_field_names = ["ID", "Product","Quantity" , "Bought_price", "Bought_date",
                             "Expiration", "InStock"]
-
+    #SuperPy functions
     def incre(count):
         count += 1
         return count
@@ -210,27 +214,26 @@ class SuperPy:
             writer.writerow(line)
 
     def print_stock_or_waste(variable):
-
-        new_header_str =[]
-        for item in SuperPy.bought_field_names:
-            new_header_str.append("{:>8}".format(item)) 
-        print("===================================")
-        print(new_header_str)
-        print("===================================")
+        stock_waste_title = "Stock" if variable == "True" else "Expired"
+        table = Table(title=stock_waste_title)
+        
+        for keys in SuperPy.bought_field_names:
+           table.add_column(keys)
         copy_bought_reader = SuperPy.open_read_bought()
         for line in copy_bought_reader:
             if line["InStock"] == variable:
-
-                print(
-                    "{:<8} {:<10} {:<10} {:<10} {:>10} {:>15} {:>10}".format(line["ID"],line["Product"],line["Quantity"],line["Bought_price"],line["Bought_date"],line["Expiration"],line["InStock"]))
-
-        print("===================================")
+                table.add_row("%s"%line["ID"],"%s"%line["Product"],"%s"%line["Quantity"],"%s"%line["Bought_price"],"%s"%line["Bought_date"],"%s"%line["Expiration"],"%s"%line["InStock"])
+                
+        console = Console()
+        console.print(table) 
 
     def check_same_product(product, quant,bought, expiration,key, price, reader):
         
         boolean_list =[]
         
-        for line in reader:# the csv in memory
+        # check the csv file variable in memory 
+        for line in reader:
+            
             # my variables in the line
             
             i, p, q, b, ex =line["ID"], line["Product"], line["Quantity"], line[price], line["Expiration"]
@@ -342,7 +345,9 @@ class Sell(SuperPy):
                     condition = True # condition is True till the correct quantity was added to the sell file
                     
                     
-                    for line in copy_bought_reader: # Here we will start iterating over the bought file to find the products that are closest to expire
+                    for line in copy_bought_reader: 
+                        
+                        # Here we will start iterating over the bought file to find the products that are closest to expire
 
                         expiration = line.get("Expiration") 
                         current_ex = datetime.strptime(

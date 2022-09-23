@@ -22,14 +22,14 @@ def create_time_file(time):
         print(f"Your system date has been reseted to live date: {date.today()} ")
         os.remove(PATH_TXT)
     elif time in "1234567890":
-        print(f"Your current system date is: {date.today() + timedelta(days=int(int(time)))}")
+        print(f"Your current system date is now: {date.today() + timedelta(days=int(int(time)))}")
         with open(PATH_TXT, "w") as write_file:
             write_file.write(time)
     else:
         print("That is an invalid input, use 1234567890 or the word reset")
         
 if time_file_exists:
-    with open("C:/Users/samue/Projects/Back-end/SuperPy_market/time.txt", "r") as read_file:
+    with open(PATH_TXT, "r") as read_file:
         num = read_file.read()
         now = date.today() + timedelta(days=int(int(num)))
 else:
@@ -150,14 +150,18 @@ class SuperPy:
         if len(expiration_list) == 0:
             return print(f"Sorry! but you dont have anymore: {product}s in your inventory")
 
-        for date in expiration_list:  # function to determine lowest expiration date
-
+        for date in expiration_list: 
+            # function to determine lowest expiration date
+            # loop over each expiration date
             ExpirationDate = datetime.strptime(
                 date, "%Y-%m-%d").date()
             amount_days = ExpirationDate - now
 
+            # see amount of days till product is expired
+            
             if int(amount_days.days) > 0:
                 day_list.append(int(amount_days.days))
+            
             lowest = min(day_list)
 
         return lowest
